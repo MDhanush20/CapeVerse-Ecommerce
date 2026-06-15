@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    
+.card{
+height: 100%;
+}
+
+.card-img-top{
+height: 250px;
+width: 100%;
+object-fit: cover;
+}
+
+.card-body h5{
+min-height: 50px;
+}
+
+</style>
+
+<div class="container mt-5 pt-5">
+
+<h2>My Wishlist</h2>
+
+<div class="row">
+
+{% for item in wishlist_items %}
+
+<div class="col-md-3 mb-3">
+
+    <div class="card">
+        <a href="/products/product/{{ item.product.id }}/" style="text-decoration: none; color: black;">
+
+            <img src="{{ item.product.image.url }}" class="card-img-top">
+            
+            <div class="card-body">
+                <h5>{{ item.product.name }}</h5>
+            </a>
+            <p> <strong>₹</strong>   {{ item.product.price }}</p>
+            <div class=" d-grid gap-2">
+
+                <a href="{% url 'accounts:remove_from_wishlist' item.id %}" class="btn btn-danger btn-sm">
+                    Remove
+                </a> 
+                <a href="{% url 'accounts:buy_now' item.id %}" class="btn btn-sm"style="background-color: rgb(255, 225, 0);"    >
+                    Buy Now
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

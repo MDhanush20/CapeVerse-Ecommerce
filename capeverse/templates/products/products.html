@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+
+        {% for product in products %}
+
+        <div class="col-md-3 mb-4">
+            <a href="products/product/{{product.id}}/" style="text-decoration: none; color: black;">
+            <div class="card">
+
+{% if product.image %}
+    <img src="{{ product.image.url }}" class="card-img-top" style="height:300px; object-fit:cover;">
+    {% endif %}
+    
+    <div class="card-body">
+        <h5 class="card-title text-truncate w-100" >
+            {{ product.name }}
+        </h5>
+    </a>
+
+
+                    <p>₹ {{ product.price }}</p>
+                              <a href="{% url 'accounts:add_to_cart' product.id %}" class="btn btn-outline-dark btn-sm">
+    Add to cart
+</a>
+
+<a href="{% url 'accounts:add_to_wishlist' product.id %}" class="btn btn-outline-dark btn-sm">
+    ❤️
+</a>
+
+<a href="{% url 'accounts:buy_now' product.id %}" class="btn btn-sm" style="background-color: rgb(255, 225, 0);">
+   <strong style="background-color: transparent;"> Buy Now ₹ {{ product.price }} </strong>
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

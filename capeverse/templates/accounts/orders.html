@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 pt-5">
+
+    <h2 class="mb-4">My Orders</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Order ID</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date & Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for order in orders %}
+                <tr>
+
+                    <td>
+                        
+
+                            <a href="/products/product/{{ item.product.id }}/"></a>
+                            {% for item in order.orderitem_set.all %}
+                            <img src="{{ item.product.image.url }}"
+                            class="img-fluid rounded mb-1"
+                            width="60"
+                            alt="{{ item.product.name }}" >
+                            {% endfor %}
+                    </td>
+
+                    <td>
+                        {% for item in order.orderitem_set.all %}
+                            <div>
+                                <a href="/products/product/{{ item.product.id }}/"
+                                   class="text-decoration-none text-dark">
+                                    {{ item.product.name }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        {% for item in order.orderitem_set.all %}
+                            <div>Qty: {{ item.quantity }}</div>
+                        {% endfor %}
+                    </td>
+
+                    <td>#{{ order.id }}</td>
+
+                    <td>₹{{ order.total_amount }}</td>
+
+                    <td>
+                        <span class="badge bg-primary">
+                            {{ order.status }}
+                        </span>
+                    </td>
+
+                    <td>{{ order.created_at }}</td>
+
+                    <td>
+                        <a href="{% url 'accounts:cancel_product' order.id %}"
+                           class="btn btn-danger btn-sm">
+                            Cancel
+                        </a>
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">
+                        No orders found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+*,body{
+    background-color: #F8FAFC;
+}
+
+.category-card{
+    text-decoration:none;
+    color:black;
+    display:block;
+    transition:.3s;
+}
+
+.category-card:hover{
+    transform:translateY(-10px);
+}
+
+.category-card img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:50%;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.trending-card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.trending-card:hover{
+    transform:translateY(-10px);
+}
+
+.trending-card img{
+    height:280px;
+    object-fit:cover;
+}
+
+.faq{
+    display: flex;
+    gap: 20px;
+}
+.faql,.faqr{
+    width: 50%;
+}

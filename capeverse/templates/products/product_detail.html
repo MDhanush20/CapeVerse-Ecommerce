@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 pt-5">
+
+    <div class="row align-items-center">
+       
+        <div class="col-12 col-md-6 text-center mb-4 mb-md-0">
+
+            <h1 class="mb-4">{{ product.name }}</h1>
+
+            {% if product.image %}
+            <img src="{{ product.image.url }}"
+                 class="img-fluid rounded shadow"
+                 style="max-height:500px; object-fit:cover;"
+                 alt="{{ product.name }}">
+            {% endif %}
+
+        </div>
+
+      
+        <div class="col-12 col-md-6">
+
+            <p class="lead">
+                {{ product.description }}
+            </p>
+
+            <h3 class="mb-4 text-dark">
+                ₹{{ product.price }}
+            </h3>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <a href="{% url 'accounts:add_to_cart' product.id %}"
+                   class="btn btn-outline-dark">
+                    Add to cart
+                </a>
+
+                <a href="{% url 'accounts:add_to_wishlist' product.id %}"
+                   class="btn btn-outline-dark" >
+                    ❤️
+                </a>
+
+                <a href="{% url 'accounts:buy_now' product.id %}"
+                   class="btn"style="background-color: rgb(255, 225, 0);">
+                    Buy @ ₹{{ product.price }}
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
